@@ -44,4 +44,9 @@ export class Tab2Page {
     toast.present();
   }
 
+
+  mostrarFiltros() {
+
+  }
+
 }

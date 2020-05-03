@@ -4,12 +4,29 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     <ion-item>
         <ion-label>¿Eres una empresa?</ion-label>
         <ion-toggle color="primary" [(ngModel)]="esEmpresa"></ion-toggle>
     </ion-item>
-    <form [style.display]="esEmpresa ? 'block' : 'none'" [formGroup]="form" (ngSubmit)="guardarEmpresa()">
+
+
+
+
+    <form [style.display]="esEmpresa ? 'block' : 'none'" [formGroup]="form" (ngSubmit)="presentAlertConfirm()">
+        <div class="ion-text-center">
+            <img [src]="img" class="ion-justify-content-center">
+            <ion-item class="ion-text-center">
+                <ion-label>
+                    <ion-button type="button" size="medium" color="success" (click)="tomarFoto()">
+                        <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+                    </ion-button>
+                    <ion-button type="button" size="medium" color="success" (click)="tomarFoto()">
+                        <ion-icon name="image-outline" slot="icon-only"></ion-icon>
+                    </ion-button>
+                </ion-label>
+            </ion-item>
+        </div>
         <ion-item>
             <ion-input placeholder="Nombre" formControlName="nombre"></ion-input>
         </ion-item>
@@ -25,7 +42,7 @@
         <ion-item>
             <ion-textarea placeholder="Mas informacion de la empresa..." formControlName="comentarios"></ion-textarea>
         </ion-item>
-        <div id="map">
+        <div id="map" class="center">
         </div>
         <ion-button type="submit" size="block">Crear Nueva Empresa</ion-button>
     </form>

@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LargoPipe implements PipeTransform {
 
   transform(value: string): string {
+    if (value == null) { return; }
     const final = value;
     if (final.length <= 200) {
       return final;

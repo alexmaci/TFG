@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from 'src/app/models/empresa.model';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { storage } from 'firebase';
+import { AlertController } from '@ionic/angular';
 
 declare var google;
 
@@ -22,8 +25,9 @@ export class NuevoUsuarioPage implements OnInit {
   sectores: any[];
   empresa: Empresa;
   marker: any;
+  img = 'assets/img/placeholder.png';
 
-  constructor(private location: Geolocation, private empresaService: EmpresaService, private router: Router, private auth: AuthService, private usua: UsuarioService, private fb: FormBuilder, private sectoresService: SectoresService) {
+  constructor(private alertController: AlertController, private cam: Camera, private location: Geolocation, private empresaService: EmpresaService, private router: Router, private auth: AuthService, private usua: UsuarioService, private fb: FormBuilder, private sectoresService: SectoresService) {
     this.getSectores();
     this.crearFormulario();
   }
@@ -55,10 +59,37 @@ export class NuevoUsuarioPage implements OnInit {
     this.router.navigateByUrl('/tabs/tab1');
   }
 
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirma el registro',
+      message: 'Se va a proceder al registro de la empresa con la localización marcada en el mapa. ¿Estas seguro que es ese el lugar que quieres marcar como localización de tu empresa?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.guardarEmpresa();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   guardarEmpresa() {
 
     if (this.form.valid) {
       this.empresa = new Empresa();
+      this.empresa.img = null;
+      if (this.img !== 'assets/img/placeholder.png') {
+        const id = new Date().valueOf().toString();
+        this.guardarImagen(id);
+        this.empresa.img = id;
+      }
       this.empresa.nombre = this.form.get('nombre').value;
       this.empresa.email = this.form.get('email').value;
       this.empresa.latitud = this.marker.getPosition().lat();
@@ -92,6 +123,26 @@ export class NuevoUsuarioPage implements OnInit {
       draggable: true,
       title: 'drag me!!!'
     });
+  }
+
+  async tomarFoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.cam.DestinationType.DATA_URL,
+      encodingType: this.cam.EncodingType.JPEG,
+      mediaType: this.cam.MediaType.PICTURE,
+      correctOrientation: true,
+      targetHeight: 600,
+      targetWidth: 600
+    };
+
+    const res = await this.cam.getPicture(options).then();
+    this.img = `data:image/jpeg;base64,${res}`;
+  }
+
+  guardarImagen(url: string) {
+    const pictures = storage().ref(url);
+    pictures.putString(this.img, 'data_url');
   }
 
 

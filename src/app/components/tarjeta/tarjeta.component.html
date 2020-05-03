@@ -1,0 +1,10 @@
+<ion-card>
+    <img *ngIf="empresa.imagen != null || empresa.img != null" [src]="imagen" />
+    <ion-card-header>
+        <ion-card-subtitle>{{empresa.email}}</ion-card-subtitle>
+        <ion-card-title>{{empresa.nombre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        {{empresa.comentarios | largo}}
+    </ion-card-content>
+</ion-card>

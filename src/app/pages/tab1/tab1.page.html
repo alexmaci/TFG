@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Mis Empresas
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+    <ion-item>
+
+        <ion-label>Empresas privadas</ion-label>
+        <ion-toggle [(ngModel)]="mostrarPrivadas"></ion-toggle>
+    </ion-item>
+    <ion-list *ngIf="mostrarPrivadas">
+        <ion-list-header>Empresas privadas</ion-list-header>
+        <ion-item-sliding *ngFor="let empresa of empresasPrivadas">
+            <ion-item>
+                <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
+            </ion-item>
+            <ion-item-options>
+                <ion-item-option (click)="borrar(empresa.id)" color="danger">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+            <ion-item-options side="start">
+                <ion-item-option (click)="editar(empresa.nombre)" color="success">
+                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="!mostrarPrivadas">
+        <ion-list-header>Empresas que sigues</ion-list-header>
+        <ion-item-sliding *ngFor="let empresa of empresas; let i = index">
+            <ion-item>
+                <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
+            </ion-item>
+            <ion-item-options side="start">
+                <ion-item-option (click)="dejarSeguir(i)" color="warning">
+                    <ion-icon slot="icon-only" name="star"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+        </ion-item-sliding>
+
+    </ion-list>
+
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="agregarEmpresa()" color="tertiary">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

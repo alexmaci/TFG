@@ -22,6 +22,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
 
 import * as firebase from 'firebase';
+import { FiltrosPageModule } from './pages/filtros/filtros.module';
 
 firebase.initializeApp(environment.firebase);
 
@@ -30,7 +31,7 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule,
-    AngularFireAuthModule, AngularFirestoreModule, AngularFireModule.initializeApp(environment.firebase)],
+    AngularFireAuthModule, AngularFirestoreModule, AngularFireModule.initializeApp(environment.firebase), FiltrosPageModule],
   providers: [
     AngularFireStorage,
     ImagePicker,

@@ -18,7 +18,7 @@ export class Tab1Page {
 
   empresasPrivadas: EmpresaNueva[];
   empresas: Empresa[];
-  mostrarPrivadas = true;
+  mostrar = 'privadas';
 
   constructor(private empresaService: EmpresaService, private router: Router,
     private auth: AuthService, public srvcEmpresaPrivada: EmpresasPrivadasService,
@@ -98,6 +98,10 @@ export class Tab1Page {
       duration: 2000,
     });
     toast.present();
+  }
+
+  cambio() {
+    console.log(this.mostrar);
   }
 
 

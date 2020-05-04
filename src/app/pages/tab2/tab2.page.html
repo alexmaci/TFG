@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">
     <ion-list>
-        <ion-item-sliding *ngFor="let empresa of empresas; let i = index">
+        <ion-item-sliding *ngFor="let empresa of empresasFiltradas; let i = index">
             <ion-item>
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
             </ion-item>

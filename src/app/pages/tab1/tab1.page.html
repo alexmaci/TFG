@@ -8,14 +8,18 @@
 
 
 
-<ion-content [fullscreen]="true">
-    <ion-item>
+<ion-content class="ion-padding" [fullscreen]="true">
 
-        <ion-label>Empresas privadas</ion-label>
-        <ion-toggle [(ngModel)]="mostrarPrivadas"></ion-toggle>
-    </ion-item>
-    <ion-list *ngIf="mostrarPrivadas">
-        <ion-list-header>Empresas privadas</ion-list-header>
+    <ion-segment [(ngModel)]="mostrar" (ionChange)=cambio()>
+        <ion-segment-button value="publicas">
+            <ion-label>Empresas publicas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="privadas">
+            <ion-label>Empresas privadas</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-list *ngIf="mostrar == 'privadas'">
         <ion-item-sliding *ngFor="let empresa of empresasPrivadas">
             <ion-item>
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
@@ -33,8 +37,7 @@
         </ion-item-sliding>
     </ion-list>
 
-    <ion-list *ngIf="!mostrarPrivadas">
-        <ion-list-header>Empresas que sigues</ion-list-header>
+    <ion-list *ngIf="mostrar == 'publicas'">
         <ion-item-sliding *ngFor="let empresa of empresas; let i = index">
             <ion-item>
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>

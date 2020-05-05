@@ -100,13 +100,6 @@ export class Tab1Page {
     toast.present();
   }
 
-  cambio() {
-    console.log(this.mostrar);
-  }
-
-
-
-
 
 
 

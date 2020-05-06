@@ -13,11 +13,20 @@
 
 <ion-content [fullscreen]="true">
 
-    <ion-searchbar placeholder="Buscar..."></ion-searchbar>
+    <ion-searchbar [(ngModel)]="nombre" placeholder="Buscar..."></ion-searchbar>
+
+    <ion-chip *ngIf="distancia" color="primary" (click)="quitarFiltroDistancia()">
+        <ion-label>Distancia</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf="sector" color="primary" (click)="quitarFiltroSector()">
+        <ion-label>Sector</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+    </ion-chip>
 
     <ion-list>
         <ion-item-sliding *ngFor="let empresa of empresasFiltradas; let i = index">
-            <ion-item>
+            <ion-item *ngIf="empresa.nombre.toLowerCase().includes(this.nombre.toLowerCase())">
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
             </ion-item>
             <ion-item-options side="start">

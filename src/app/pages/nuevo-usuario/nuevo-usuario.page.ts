@@ -125,6 +125,22 @@ export class NuevoUsuarioPage implements OnInit {
     });
   }
 
+  async galeria() {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.cam.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.cam.DestinationType.DATA_URL,
+      encodingType: this.cam.EncodingType.JPEG,
+      mediaType: this.cam.MediaType.PICTURE,
+      correctOrientation: true,
+      targetHeight: 600,
+      targetWidth: 600
+    };
+
+    const res = await this.cam.getPicture(options).then();
+    this.img = `data:image/jpeg;base64,${res}`;
+  }
+
   async tomarFoto() {
     const options: CameraOptions = {
       quality: 100,

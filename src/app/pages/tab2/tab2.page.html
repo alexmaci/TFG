@@ -26,7 +26,7 @@
 
     <ion-list>
         <ion-item-sliding *ngFor="let empresa of empresasFiltradas; let i = index">
-            <ion-item *ngIf="empresa.nombre.toLowerCase().includes(this.nombre.toLowerCase())">
+            <ion-item [routerLink]="['/detalle',empresa.id]" *ngIf="empresa.nombre.toLowerCase().includes(this.nombre.toLowerCase())">
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
             </ion-item>
             <ion-item-options side="start">

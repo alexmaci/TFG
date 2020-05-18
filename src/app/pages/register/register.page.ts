@@ -27,11 +27,16 @@ export class RegisterPage implements OnInit {
   crearFormulario() {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      pass: ['', [Validators.required, Validators.minLength(8)]]
+      pass: ['', [Validators.required, Validators.minLength(8)]],
+      pass2: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
   guardar() {
+    if (this.form.get('pass').value !== this.form.get('pass2').value) {
+      this.crearAlerta('Ambas contraseñas han de ser iguales');
+      return;
+    }
     if (this.form.invalid) {
       if (this.form.get('email').errors) {
         this.crearAlerta('Por favor introduzca un correo electronico valido');

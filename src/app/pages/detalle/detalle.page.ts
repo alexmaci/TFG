@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmpresasPrivadasService } from '../../services/empresas-privadas.service';
-import { EmpresaNueva } from '../../models/empresaNueva.model';
+import { EmpresaService } from '../../services/empresa.service';
+import { Empresa } from '../../models/empresa.model';
 import { storage } from 'firebase';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
+
 
 declare var google;
 
 @Component({
-  selector: 'app-detalles-empresa',
-  templateUrl: './detalles-empresa.page.html',
-  styleUrls: ['./detalles-empresa.page.scss'],
+  selector: 'app-detalle',
+  templateUrl: './detalle.page.html',
+  styleUrls: ['./detalle.page.scss'],
 })
-export class DetallesEmpresaPage implements OnInit {
-
-  empresa: EmpresaNueva;
-  imagen = 'assets/img/placeholder.png';;
+export class DetallePage implements OnInit {
+  empresa: Empresa;
+  imagen = 'assets/img/placeholder.png';
   marker: any;
 
-  constructor(private router: ActivatedRoute, private empresaService: EmpresasPrivadasService, private location: Geolocation, private launchNavigator: LaunchNavigator) { }
+
+  constructor(private router: ActivatedRoute, private empresaService: EmpresaService, private launchNavigator: LaunchNavigator) { }
 
   ngOnInit() {
     this.getEmpresa();
@@ -28,7 +28,7 @@ export class DetallesEmpresaPage implements OnInit {
   getEmpresa() {
     this.router.params.subscribe(
       (datos) => {
-        this.empresaService.getEmpresa(datos.id).subscribe(
+        this.empresaService.recuperarEmpresa(datos.id).subscribe(
           (data) => {
             this.empresa = data;
             this.cargarImagen();
@@ -39,15 +39,15 @@ export class DetallesEmpresaPage implements OnInit {
   }
 
   cargarImagen() {
-    if (this.empresa.imagen != null) {
-      storage().ref(this.empresa.imagen).getDownloadURL().then(
+    if (this.empresa.img != null) {
+      storage().ref(this.empresa.img).getDownloadURL().then(
         (data) => {
           this.imagen = data;
         }
       );
     }
-    if (this.empresa.imagen != null) {
-      storage().ref(this.empresa.imagen).getDownloadURL().then(
+    if (this.empresa.img != null) {
+      storage().ref(this.empresa.img).getDownloadURL().then(
         (data) => {
           this.imagen = data;
         }

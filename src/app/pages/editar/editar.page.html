@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Editar Empresa</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="ion-text-center">
+        <img [src]="imagen" class="ion-justify-content-center">
+        <ion-item class="ion-text-center">
+            <ion-label>
+                <ion-button type="button" size="medium" color="success" (click)="tomarFoto()">
+                    <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                <ion-button type="button" size="medium" color="success" (click)="galeria()">
+                    <ion-icon name="image-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+            </ion-label>
+        </ion-item>
+    </div>
+
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <ion-item>
+            <ion-input placeholder="Nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Correo" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Sector</ion-label>
+            <ion-select formControlName="sector">
+                <ion-select-option *ngFor="let sector of sectores" [value]="sector.nombre">{{sector.nombre}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-textarea placeholder="Mas informacion de la empresa..." formControlName="comentarios"></ion-textarea>
+        </ion-item>
+        <div id='map' class="center">
+        </div>
+
+        <ion-button type="submit" size="block">Guardar cambios</ion-button>
+
+    </form>
+</ion-content>

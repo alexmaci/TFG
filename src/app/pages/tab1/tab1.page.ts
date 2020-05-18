@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { EmpresasPrivadasService } from '../../services/empresas-privadas.service';
 import { EmpresaNueva } from '../../models/empresaNueva.model';
@@ -7,7 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Empresa } from 'src/app/models/empresa.model';
 import { EmpresaService } from '../../services/empresa.service';
 import { storage } from 'firebase';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -22,7 +22,7 @@ export class Tab1Page {
 
   constructor(private empresaService: EmpresaService, private router: Router,
     private auth: AuthService, public srvcEmpresaPrivada: EmpresasPrivadasService,
-    private userService: UsuarioService, public toastController: ToastController) {
+    private userService: UsuarioService, public toastController: ToastController, private navCtrl: NavController) {
     this.empresasPrivadas = [];
     this.empresas = [];
     this.getEmpresasPrivadas();
@@ -32,23 +32,18 @@ export class Tab1Page {
 
   }
 
-  ionViewDidLoad() {
-
-  }
-
-
   empresaSeleccionada(empresa: string) {
     console.log(empresa);
+  }
+
+  editar(empresa: EmpresaNueva) {
+    console.log(empresa);
+    this.router.navigate(['editar', { id: empresa.id }]);
   }
 
   borrar(idEmpresa: string) {
     this.srvcEmpresaPrivada.borrarEmpresa(idEmpresa);
   }
-
-  editar(empresa: string) {
-    console.log(empresa);
-  }
-
 
   agregarEmpresa() {
     this.router.navigateByUrl('/tabs/tab1/nuevaEmpresa');

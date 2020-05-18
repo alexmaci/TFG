@@ -32,4 +32,6 @@ export class EmpresaService {
   recuperarEmpresa(idEmpresa: string) {
     return this.db.collection('empresas').doc<Empresa>(idEmpresa).valueChanges();
   }
+
+
 }

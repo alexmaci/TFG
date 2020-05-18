@@ -24,7 +24,8 @@ const routes: Routes = [
           {
             path: 'nuevaEmpresa',
             loadChildren: () => import('../nueva-empresa/nueva-empresa.module').then(m => m.NuevaEmpresaPageModule)
-          }
+          },
+
         ]
       },
       {

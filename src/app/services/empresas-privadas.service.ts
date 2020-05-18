@@ -12,6 +12,20 @@ export class EmpresasPrivadasService {
   constructor(private db: AngularFirestore) {
   }
 
+  updateEmpresa(empresa: EmpresaNueva) {
+    this.db.collection('/empresasPrivadas').doc(empresa.id).set({
+      nombre: empresa.nombre,
+      email: empresa.email,
+      comentarios: empresa.comentarios,
+      latitud: empresa.latitud,
+      longitud: empresa.longitud,
+      usuario: empresa.usuario,
+      id: empresa.id,
+      sector: empresa.sector,
+      imagen: empresa.imagen
+    });
+  }
+
   addEmpresa(empresa: EmpresaNueva) {
     const idGenerada = this.db.createId();
     return new Promise<any>((resolve, reject) => {
@@ -38,6 +52,10 @@ export class EmpresasPrivadasService {
 
   borrarEmpresa(id: string) {
     this.db.collection('empresasPrivadas').doc(id).delete();
+  }
+
+  getEmpresa(id: string) {
+    return this.db.collection('/empresasPrivadas').doc<EmpresaNueva>(id).valueChanges();
   }
 
 }

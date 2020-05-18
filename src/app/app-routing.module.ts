@@ -16,6 +16,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/nuevo-usuario/nuevo-usuario.module').then(m => m.NuevoUsuarioPageModule)
   },
   {
+    path: 'editar/:id',
+    loadChildren: () => import('./pages/editar/editar.module').then(m => m.EditarPageModule)
+  },
+  {
+    path: 'detalles-empresa/:id',
+    loadChildren: () => import('./pages/detalles-empresa/detalles-empresa.module').then(m => m.DetallesEmpresaPageModule)
+  },
+  {
+    path: 'detalle/:id',
+    loadChildren: () => import('./pages/detalle/detalle.module').then(m => m.DetallePageModule)
+  },
+  {
     path: 'nueva-empresa',
     loadChildren: () => import('./pages/nueva-empresa/nueva-empresa.module').then(m => m.NuevaEmpresaPageModule)
   },
@@ -31,14 +43,13 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'tabs'
   },
-  {
-    path: 'detalles-empresa',
-    loadChildren: () => import('./pages/detalles-empresa/detalles-empresa.module').then(m => m.DetallesEmpresaPageModule)
-  },
+
   {
     path: 'filtros',
-    loadChildren: () => import('./pages/filtros/filtros.module').then( m => m.FiltrosPageModule)
+    loadChildren: () => import('./pages/filtros/filtros.module').then(m => m.FiltrosPageModule)
   },
+
+
 
 
 ];

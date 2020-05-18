@@ -21,7 +21,7 @@
 
     <ion-list *ngIf="mostrar == 'privadas'">
         <ion-item-sliding *ngFor="let empresa of empresasPrivadas">
-            <ion-item>
+            <ion-item [routerLink]="['/detalles-empresa',empresa.id]">
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
             </ion-item>
             <ion-item-options>
@@ -30,7 +30,7 @@
                 </ion-item-option>
             </ion-item-options>
             <ion-item-options side="start">
-                <ion-item-option (click)="editar(empresa.nombre)" color="success">
+                <ion-item-option [routerLink]="['/editar',empresa.id]" color="success">
                     <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
@@ -39,7 +39,7 @@
 
     <ion-list *ngIf="mostrar == 'publicas'">
         <ion-item-sliding *ngFor="let empresa of empresas; let i = index">
-            <ion-item>
+            <ion-item [routerLink]="['/detalle',empresa.id]">
                 <app-tarjeta [empresaRecibida]="empresa"></app-tarjeta>
             </ion-item>
             <ion-item-options side="start">

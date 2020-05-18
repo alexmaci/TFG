@@ -19,10 +19,12 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { IonicHeaderParallaxModule } from 'ionic-header-parallax';
 
 
 import * as firebase from 'firebase';
 import { FiltrosPageModule } from './pages/filtros/filtros.module';
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 
 firebase.initializeApp(environment.firebase);
 
@@ -31,8 +33,10 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule,
-    AngularFireAuthModule, AngularFirestoreModule, AngularFireModule.initializeApp(environment.firebase), FiltrosPageModule],
+    AngularFireAuthModule, AngularFirestoreModule, AngularFireModule.initializeApp(environment.firebase), FiltrosPageModule,
+    IonicHeaderParallaxModule],
   providers: [
+    LaunchNavigator,
     AngularFireStorage,
     ImagePicker,
     Crop,

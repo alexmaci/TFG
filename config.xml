@@ -99,4 +99,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator@3" source="npm">
+        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="{AIzaSyCU85y0UXdOLff01xdVM32NVbhOHP5Ewf8}" />
+    </plugin>
 </widget>
